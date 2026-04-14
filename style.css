@@ -1,0 +1,83 @@
+:root {
+    --hacker-red: #ff0000;
+    --deep-black: #050505;
+    --neon-glow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+body {
+    background-color: var(--deep-black);
+    color: var(--hacker-red);
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.terminal-box {
+    border: 2px solid var(--hacker-red);
+    padding: 20px;
+    box-shadow: var(--neon-glow);
+    background: #000;
+    width: 450px;
+}
+
+textarea {
+    width: 100%;
+    background: #111;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    resize: none;
+}
+
+.glitch-btn {
+    background: var(--hacker-red);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Efeito Glitch no Hover */
+.glitch-btn:hover {
+    text-shadow: 2px 2px #fff;
+    box-shadow: 5px 0px 0px #fff, -5px 0px 0px #fff;
+    animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
+}
+
+#output {
+    background: #0a0a0a;
+    border: 1px dashed var(--hacker-red);
+    padding: 10px;
+    min-height: 50px;
+    word-break: break-all;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-container i {
+    font-size: 48px;
+    color: var(--hacker-red);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
