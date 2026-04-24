@@ -1,32 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <title>Dark Cipher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Cipher V1.0</title>
+
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 118 94'><path fill='%23ff0000' d='M24.509 0c-6.364 0-20.491 1.506-20.491 6.223 0 5.337 3.692 7.231 20.491 7.231h15.847v13.958h-21.256c-33.814 0-51.666-20.354-51.666-40.496 0-37.863 35.064-47.167 51.666-47.167h21.256v13.688h-15.847c-20.81 0-20.491 2.313-20.491 5.93 0 3.917 0-6.223 20.491 6.223h24.384v70.411h-36.722v-10.741h10.33V0h27.152v83.562h-10.009V92.73h36.722V0H24.509zM37.503 0v7.084h37.488v-.531c0-3.900 3.061-6.553 7.475-6.553h15.364c4.414 0 7.313 2.653 7.313 6.553v71.471c0 3.900-2.899 6.587-7.313 6.587h-15.364c-4.414 0-7.475-2.687-7.475-6.587v-.531h-37.488v7.084H0V0h37.503z'/></svg>" type="image/svg+xml">
+
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="terminal-box">
-        <div class="logo-container">
+
+<main class="app">
+
+    <header class="app-header">
+        <div class="logo">
             <i class="bi bi-key-fill"></i>
+            <span>Dark Cipher</span>
         </div>
-        <h3>[DARK_CIPHER V1.0]</h3>
-        <p>ENTRADA_DE_DADOS:</p>
-        <textarea id="inputText" rows="4" placeholder="Digite aqui...">
-        </textarea>
+        <small class="version">v1.0</small>
+    </header>
 
-        <button class="glitch-btn" onclick="cipher('encode')">Criptografar</button>
-        <button class="glitch-btn" onclick="cipher('decode')">Descriptografar</button>
+    <section class="terminal">
 
-        <p>SAÍDA_PROCESSADA:</p>
-        <div id="output">_AGUARDANDO_COMANDO_</div>
-    </div>
+        <div class="terminal-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
 
-    <script src="script.js"></script>
+        <div class="terminal-body">
 
-    
+            <label for="inputText">Entrada</label>
+            <textarea id="inputText" placeholder="Digite seu texto..."></textarea>
+
+            <div class="actions">
+                <button class="btn-glitch" data-action="encode">
+                    Criptografar
+                </button>
+
+                <button class="btn-glitch" data-action="decode">
+                    Descriptografar
+                </button>
+            </div>
+
+            <label>Saída</label>
+            <div id="output" class="output">
+                _aguardando comando_
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
 </body>
 </html>
