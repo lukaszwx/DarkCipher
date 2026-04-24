@@ -1,83 +1,201 @@
 :root {
-    --hacker-red: #ff0000;
-    --deep-black: #050505;
-    --neon-glow: 0 0 10px rgba(255, 0, 0, 0.7);
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --border: #1a1a1a;
+
+    --text: #e5e5e5;
+    --muted: #777;
+
+    --accent: #ff3b3b; /* vermelho mais elegante */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--deep-black);
-    color: var(--hacker-red);
-    font-family: 'Courier New', Courier, monospace;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    overflow: hidden;
 }
 
-.terminal-box {
-    border: 2px solid var(--hacker-red);
+/* NOISE + SCANLINE */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
+    z-index: -1;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    z-index: -1;
+}
+
+/* APP */
+.app {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* HEADER */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+    color: var(--muted);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.logo i {
+    color: var(--accent);
+}
+
+.version {
+    font-size: 0.8rem;
+}
+
+/* TERMINAL */
+.terminal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* HEADER TERMINAL */
+.terminal-header {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+    background: #080808;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+}
+
+/* BODY */
+.terminal-body {
     padding: 20px;
-    box-shadow: var(--neon-glow);
-    background: #000;
-    width: 450px;
 }
 
+/* LABEL */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+/* TEXTAREA */
 textarea {
     width: 100%;
-    background: #111;
-    color: #fff;
-    border: 1px solid #444;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
+    background: #050505;
+    border: 1px solid var(--border);
+    padding: 12px;
+    color: var(--text);
+    border-radius: 6px;
+    margin-bottom: 20px;
     resize: none;
+    outline: none;
 }
 
-.glitch-btn {
-    background: var(--hacker-red);
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
+textarea:focus {
+    border-color: var(--accent);
 }
 
-/* Efeito Glitch no Hover */
-.glitch-btn:hover {
-    text-shadow: 2px 2px #fff;
-    box-shadow: 5px 0px 0px #fff, -5px 0px 0px #fff;
-    animation: glitch 0.3s infinite;
-}
-
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
-}
-
-#output {
-    background: #0a0a0a;
-    border: 1px dashed var(--hacker-red);
-    padding: 10px;
-    min-height: 50px;
-    word-break: break-all;
-}
-
-.logo-container {
+/* BUTTONS */
+.actions {
     display: flex;
-    justify-content: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.logo-container i {
-    font-size: 48px;
-    color: var(--hacker-red);
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+.btn-glitch {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+/* GLITCH REFINADO */
+.btn-glitch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: 0.3s;
+    z-index: -1;
+}
+
+.btn-glitch:hover::before {
+    transform: translateX(0);
+}
+
+.btn-glitch:hover {
+    color: #000;
+}
+
+/* OUTPUT */
+.output {
+    background: #050505;
+    border: 1px dashed var(--border);
+    padding: 12px;
+    min-height: 60px;
+    font-size: 0.9rem;
+    word-break: break-word;
+
+    position: relative;
+}
+
+/* CURSOR PISCANDO */
+.output::after {
+    content: "|";
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    color: var(--accent);
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
 }
